@@ -7,6 +7,8 @@ import mountainUrl from "../assets/models/snowy_slope.glb";
 import { Player } from "./Player";
 import { CharacterController } from "./CharacterController";
 import {PlayerLevel1} from "./PlayerLevel1";
+
+
 window.onload = () => {
     var startButton = document.getElementById("buttonStart");
     startButton.addEventListener("click", () => {
@@ -48,18 +50,17 @@ var createScene = async () => {
     scene.enablePhysics(new Vector3(0, -9.81, 0), hk);
 
     //Creation de la caméra developpeur
-    /*
     const camera = new FreeCamera("camera1", new Vector3(0, 12, -10), scene);
     camera.attachControl();
-    */
 
-    //Creation de la caméra 3rd person
-    var camera = new FollowCamera("followCam", new Vector3(0, 60, 150), scene);
-    
-    
     var player2 = new PlayerLevel1(scene,engine,"player",'z',"s","q","d",0,15,-5);
     let playerMeshk = scene.getMeshByName("player");
+
+    //Creation de la caméra 3rd person
+    /*
+    var camera = new FollowCamera("followCam", new Vector3(0, 0, 0), scene);
     camera.lockedTarget = playerMeshk;
+    camera.position._y = 10;*/
 
     //Musique 
     let assetsManager = new AssetsManager(scene);
@@ -71,6 +72,15 @@ var createScene = async () => {
     let light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
     light.intensity = 0.7;
 
+    //Creation de la skyBox
+    const skybox = MeshBuilder.CreateBox('skyBox', { size: 1000.0 }, scene);
+    const skyboxMaterial = new StandardMaterial('skyBoxMaterial', scene);
+    skyboxMaterial.backFaceCulling = false;
+    skyboxMaterial.reflectionTexture = new CubeTexture("https://raw.githubusercontent.com/Wiro13/babylonJS_test1/c00188a397c386491e236520a3fbf80c380319ee/environment.env", scene);
+    skyboxMaterial.reflectionTexture.coordinatesMode = Texture.SKYBOX_MODE;
+    skyboxMaterial.disableLighting = true;
+    skybox.material = skyboxMaterial;
+
     /**************************************Gestion des Object 3D******************************************/
     var map = new Models(scene);
     map.importMontain();
@@ -78,7 +88,7 @@ var createScene = async () => {
     var skieur = new Models(scene);
 
     /**************************************Gestion du joueur******************************************/
-  
+
 
     /***********************************fin de Gestion des Object 3D***************************************/
     return scene;

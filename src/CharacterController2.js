@@ -18,11 +18,10 @@ class CharacterController {
         engine.runRenderLoop(() => {
 
             if (this.keys[forwardI]) {
-                let forward = character.transformNode.forward.scale(-5);
+                let forward = character.transformNode.forward.scale(-3);
 
                 character.applyForce(forward , character.transformNode.position);
                 character.setAngularVelocity(Vector3.ZeroReadOnly);
-          
             }
 
             if (this.keys[backward]) {

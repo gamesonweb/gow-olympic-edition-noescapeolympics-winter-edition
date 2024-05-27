@@ -5,7 +5,6 @@ import HavokPhysics from "@babylonjs/havok";
 import mountainUrl from "../assets/models/snowy_slope.glb";
 import skierUrl from "../assets/models/skier_low_poly_character.glb";
 
-
 export class Models {
 
     constructor(scene) {
