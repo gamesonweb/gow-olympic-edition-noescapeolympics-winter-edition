@@ -50,17 +50,17 @@ var createScene = async () => {
     scene.enablePhysics(new Vector3(0, -9.81, 0), hk);
 
     //Creation de la caméra developpeur
+    /*
     const camera = new FreeCamera("camera1", new Vector3(0, 12, -10), scene);
     camera.attachControl();
-
+    */
     var player2 = new PlayerLevel1(scene,engine,"player",'z',"s","q","d",0,15,-5);
     let playerMeshk = scene.getMeshByName("player");
 
     //Creation de la caméra 3rd person
-    /*
     var camera = new FollowCamera("followCam", new Vector3(0, 0, 0), scene);
     camera.lockedTarget = playerMeshk;
-    camera.position._y = 10;*/
+    camera.position._y = 10;
 
     //Musique 
     let assetsManager = new AssetsManager(scene);
